@@ -29,10 +29,10 @@ jobs:
 
     steps:
       - name: Checking out frontend code # this pulls the frontend code into the ubuntu runner
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with: 
           node-version: 16
       
