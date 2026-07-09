@@ -48,6 +48,7 @@ jobs:
   push: 
     name: Frontend image release # if image was built successfully, it's time to push it to docker hub 🐳
     needs: build
+    if: github.event_name == 'push'
     runs-on: ubunut-latest
 
     steps:
