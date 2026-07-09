@@ -1,0 +1,68 @@
+name: Dream Vacation App Frontend CI
+
+on:
+  push: # the push event on the main branch will trigger the workflow to start
+    branches: 
+      - main
+    paths:
+      - frontend/**
+      - .github/workflows/frontend.yml
+  pull_request: # also a pull request event to the main or dev branches will trigger the workflow to start
+    branches: 
+      - main
+      - dev
+    paths:
+      - frontend/**
+      - .github/workflows/frontend.yml
+  workflow_dispatch:
+
+# 1. Building frontend Docker image
+
+jobs:
+  build:
+    name: Frontend build
+    runs-on: ubuntu-latest
+
+    defaults: 
+      run: 
+        working-directory: frontend
+
+    steps:
+      - name: Checking out frontend code # this pulls the frontend code into the ubuntu runner
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 16
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build Docker image
+        run: docker build -t vacation-frontend:${{ github.sha }} .
+
+
+# 2. Pushing frontend Docker image to Docker Hub
+
+  push: 
+    name: Frontend image release # if image was built successfully, it's time to push it to docker hub 🐳
+    needs: build
+    runs-on: ubunut-latest
+
+    steps:
+    - name: Checkout repository 
+      uses: actions/checkout@v4
+
+    - name: Login to Docker Hub # here github authenticates into your dockerhub account with your secret credentials
+      uses: docker/login-action@v6
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    - name: Build and push frontend image # here github does the whole docker build process and pushes the image to your docker hub account
+      uses: docker/build-push-action@v6
+      with: 
+        context: ./frontend
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
