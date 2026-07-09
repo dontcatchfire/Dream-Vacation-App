@@ -66,4 +66,4 @@ jobs:
       with: 
         context: ./frontend
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+        tags: dontcatchfire/frontend:${{ github.sha }}
