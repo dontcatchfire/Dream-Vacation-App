@@ -40,7 +40,7 @@ jobs:
         run: npm ci
       
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/dreamfrontend:${{ github.sha }} .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dreamfrontend:${{ github.sha }} .
 
       - name: Login to Docker Hub # 2. Pushing frontend Docker image to Docker Hub
         uses: docker/login-action@v3
@@ -49,7 +49,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       - name: Push frontend Docker image 
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/dreamfrontend:${{ github.sha }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/dreamfrontend:${{ github.sha }}
 
 
 # no. Pushing frontend Docker image to Docker Hub | 
