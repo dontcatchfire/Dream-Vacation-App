@@ -232,7 +232,12 @@ Every time Docker builds the image, it follows these instructions in order.
 
 Because the instructions are written down, every developer and every CI pipeline produces the same image.
 
-![](</screenshots/backend.png>)
+**frontend Dockerfile**
+![](</screenshots/frontend-dockerfile.png>)
+
+**backend-dockerfile**
+![](</screenshots/backend-dockerfile.png>)
+
 
 ---
 
@@ -263,6 +268,9 @@ Instead of starting containers individually, Docker Compose starts every require
 
 A typical application often needs multiple containers.
 
+**Docker Compose YAML file**
+![](</screenshots/docker-compose-file.png>)
+
 For example:
 
 * Frontend
@@ -291,6 +299,7 @@ docker compose up
 
 starts the complete application stack.
 
+**> docker compose up**
 ![](</screenshots/docker compose up.png>)
 
 ---
