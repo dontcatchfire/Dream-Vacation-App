@@ -48,9 +48,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-      - name: Push frontend Docker image 
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/dreamfrontend:${{ github.sha }}
+      # - name: Push frontend Docker image 
+      #   run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/dreamfrontend:${{ github.sha }}
 
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with: 
+          context: ./frontend
+          push: true
+          tags: | 
+            dontcatchfire/frontend:${{ github.sha }}
+            dontcatchfire/frontend:latest
 
 # no. Pushing frontend Docker image to Docker Hub | 
 
