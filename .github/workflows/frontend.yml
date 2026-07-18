@@ -57,8 +57,8 @@ jobs:
           context: ./frontend
           push: true
           tags: | 
-            dontcatchfire/frontend:${{ github.sha }}
-            dontcatchfire/frontend:latest
+            dontcatchfire/dreamfrontend:${{ github.sha }}
+            dontcatchfire/dreamfrontend:latest
 
 # no. Pushing frontend Docker image to Docker Hub | 
 
