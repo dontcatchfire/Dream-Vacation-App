@@ -71,3 +71,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/dreambackend:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/dreambackend:latest
