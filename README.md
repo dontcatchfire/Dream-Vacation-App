@@ -10,23 +10,37 @@
 
 ![](</screenshots/stage6img/vpc 2.png>)
 
+---
+
+**Subnet**
+
+![](</screenshots/stage6img/subnet 2.png>)
+
+---
+
 **Internet Gateway**
 
 ![](</screenshots/stage6img/intergnet gateway.png>)
 
+---
 
+**EC2 instance running with public ip address** `3.80.37.74`
 
-![](</screenshots/stage6img>)
+![](</screenshots/stage6img/instance.png>)
 
+---
 
-
+**The Deployment pipeline logs showing successful deployment**
 
 ![](</screenshots/stage6img/cd success.png>)
 
+---
 
-**The App running at port 8080**
+**The App running in the browser at port 8080**
+
 ![](</screenshots/stage6img/app runs on port 8080.png>)
 
+---
 
 **I updated the Security Group to allow traffic on port 8080** </br>
 At first, when I visited public ip address of the EC2 instance, I got an error. I was confused because I had already run `docker ps` to see if image containers were running, which they were.
@@ -35,5 +49,12 @@ I did a little "AI consulting" and that's when I remembered the frontend service
 
 ![](</screenshots/stage6img/security group.png>)
 
-**I also modified the docker-compose file**
+---
+
+**I did a little modification to the docker-compose file**
+</br>
+This is for letting Docker Compose know the exact images to pull into the instance.
+
 ![](</screenshots/stage6img/updated the docker compose file.png>)
+
+![](</screenshots/stage6img>)
