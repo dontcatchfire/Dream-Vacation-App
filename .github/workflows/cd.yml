@@ -1,10 +1,12 @@
 name: Dream Vacation App Deployment Workflow
 
 on:
+  workflow_dispatch: # manual trigger
+
   workflow_run:
     workflows:
       - Dream Vacation App Backend CI
-      - ream Vacation App Frontend CI
+      - Dream Vacation App Frontend CI
     types:
       - completed
 
