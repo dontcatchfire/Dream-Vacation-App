@@ -1,8 +1,7 @@
 services:
 
   frontend:
-    build:
-      context: ./frontend
+    image: dontcatchfire/dreamfrontend:latest
     container_name: dva_frontend
     ports:
       - "8080:80"
@@ -14,8 +13,7 @@ services:
       - dva_network
 
   backend:
-    build:
-      context: ./backend
+    image: dontcatchfire/dreambackend:latest
     container_name: dva_backend
     ports:
       - "3001:3001"

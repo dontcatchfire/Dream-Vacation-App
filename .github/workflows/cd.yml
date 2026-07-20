@@ -1,0 +1,40 @@
+name: Dream Vacation App Deployment Workflow
+
+on:
+  workflow_run:
+    workflows:
+      - Dream Vacation App Backend CI
+      - ream Vacation App Frontend CI
+    types:
+      - completed
+
+jobs:
+
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v6
+      
+      - name: Copy project files
+        uses: appleboy/scp-action@v1.0.0
+        with: 
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "."
+          target: "/home/ubuntu/app"
+        
+      - name: Deploy application
+        uses: appleboy/ssh-action@v1.2.2
+        with: 
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/app
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
